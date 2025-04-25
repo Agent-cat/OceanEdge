@@ -82,9 +82,9 @@ const Home = () => {
         transition={{ duration: 1 }}
         className='min-h-screen w-full flex flex-col items-center justify-center text-white relative overflow-x-hidden'
       >
-        {/* Left Semi-circle */}
+        {/* Left Semi-circle - Mobile visibility improved */}
         <motion.div 
-          className="absolute hidden text-xl text-white font-bold md:flex z-40 left-0 top-[40%] items-center justify-center -translate-y-1/2 w-36 h-36 bg-[#cd754a] backdrop-blur-sm rounded-r-full shadow-lg"
+          className="absolute text-xl text-white font-bold flex z-40 left-0 top-[40%] items-center justify-center -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-r-full shadow-lg"
           initial={{ scale: 1 }}
           whileHover={{ 
             scale: 1.1,
@@ -97,16 +97,17 @@ const Home = () => {
             ease: "easeOut"
           }}
           onMouseEnter={handleLeftPanelEnter}
+          onTouchStart={handleLeftPanelEnter}
           style={{ zIndex: leftPanelOpen ? 45 : 40 }}
         >
-        <h1 className='text-white font-medium '>
+        <h1 className='text-white font-medium text-sm sm:text-xl'>
         𝓢𝓮𝓬𝓾𝓻𝓮 <br/> 𝓨𝓸𝓾𝓻 <br/> 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂
         </h1>
         </motion.div>
         
-        {/* Right Semi-circle */}
+        {/* Right Semi-circle - Mobile visibility improved */}
         <motion.div 
-          className="absolute hidden md:flex items-center text-center justify-center text-xl text-white font-bold z-40 right-0 top-[40%] -translate-y-1/2 w-36 h-36 bg-[#cd754a] backdrop-blur-sm rounded-l-full shadow-lg"
+          className="absolute flex items-center text-center justify-center text-sm sm:text-xl text-white font-bold z-40 right-0 top-[40%] -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-l-full shadow-lg"
           initial={{ scale: 1 }}
           whileHover={{ 
             scale: 1.1,
@@ -119,12 +120,13 @@ const Home = () => {
             ease: "easeOut"
           }}
           onMouseEnter={handleRightPanelEnter}
+          onTouchStart={handleRightPanelEnter}
           style={{ zIndex: rightPanelOpen ? 45 : 40 }}
         >
           𝓦𝓲𝓽𝓷𝓮𝓼𝓼<br/> 𝓽𝓱𝓮<br/> 𝓱𝓮𝓪𝓿𝓮𝓷
         </motion.div>
 
-        {/* Left Sliding Panel */}
+        {/* Left Sliding Panel - improved for mobile */}
         <motion.div 
           initial={{ x: "-100%" }}
           animate={{ x: leftPanelOpen ? "0%" : "-100%" }}
@@ -135,21 +137,29 @@ const Home = () => {
             stiffness: 300,
             damping: 30
           }}
-          className="absolute left-0 top-0 w-1/2 h-full bg-white/95 backdrop-blur-sm"
+          className="absolute left-0 top-0 w-full sm:w-3/4 md:w-1/2 h-full bg-white/95 backdrop-blur-sm"
           style={{ zIndex: leftPanelOpen ? 60 : -1 }}
           onMouseEnter={handleLeftPanelEnter}
+          onTouchStart={handleLeftPanelEnter}
           onMouseLeave={handleLeftPanelLeave}
+          onTouchEnd={handleLeftPanelLeave}
         >
-          <div className=" bg-blue-400/60 w-full h-screen p-8">
-          <div className=" border-double  w-full border-2 border-white flex-col flex items-center justify-center gap-6 p-8  h-full ">
-            <h1 className='text-white   text-4xl font-bold'>𝓢𝓮𝓬𝓾𝓻𝓮 𝓨𝓸𝓾𝓻 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂</h1>
-            <h1 className='text-white text-center  text-2xl font-bold'>Discover tailor-made, end-to-end tourism packages designed just for you — covering everything from travel planning and accommodation to local experiences and seamless returns, ensuring a hassle-free and unforgettable journey.</h1>
-
-</div>
+          <div className="bg-blue-400/60 w-full h-screen p-4 sm:p-8">
+            <div className="border-double w-full border-2 border-white flex-col flex items-center justify-center gap-3 sm:gap-6 p-4 sm:p-8 h-full">
+              <h1 className='text-white text-2xl sm:text-4xl font-bold'>𝓢𝓮𝓬𝓾𝓻𝓮 𝓨𝓸𝓾𝓻 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂</h1>
+              <h1 className='text-white text-center text-sm sm:text-xl md:text-2xl font-bold'>Discover tailor-made, end-to-end tourism packages designed just for you — covering everything from travel planning and accommodation to local experiences and seamless returns, ensuring a hassle-free and unforgettable journey.</h1>
+              {/* Close button for mobile */}
+              <button 
+                onClick={handleLeftPanelLeave}
+                className="sm:hidden mt-4 bg-white/20 p-2 rounded-full"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </motion.div>
 
-        {/* Right Sliding Panel */}
+        {/* Right Sliding Panel - improved for mobile */}
         <motion.div 
           initial={{ x: "100%" }}
           animate={{ x: rightPanelOpen ? "0%" : "100%" }}
@@ -160,17 +170,25 @@ const Home = () => {
             stiffness: 300,
             damping: 30
           }}
-          className="absolute right-0 top-0 w-1/2 h-full bg-white/95 backdrop-blur-sm"
+          className="absolute right-0 top-0 w-full sm:w-3/4 md:w-1/2 h-full bg-white/95 backdrop-blur-sm"
           style={{ zIndex: rightPanelOpen ? 60 : -1 }}
           onMouseEnter={handleRightPanelEnter}
+          onTouchStart={handleRightPanelEnter}
           onMouseLeave={handleRightPanelLeave}
+          onTouchEnd={handleRightPanelLeave}
         >
-          <div className=" bg-blue-400/60 w-full h-screen p-8">
-          <div className=" border-double  w-full border-2 border-white flex-col flex items-center justify-center gap-6 p-8  h-full ">
-            <h1 className='text-white font-[robert]   text-4xl font-bold'>𝓦𝓲𝓽𝓷𝓮𝓼𝓼 𝓽𝓱𝓮 𝓱𝓮𝓪𝓿𝓮𝓷</h1>
-            <h1 className='text-white text-center  text-2xl font-bold'>Witness the ultimate investment opportunity in world-class luxury resorts! Step into a realm of elegance, exclusivity, and extraordinary returns. These premier destinations aren't just a place to relax—they're a chance to elevate your portfolio with high-value assets in the booming luxury hospitality market. Don’t miss your chance to own a piece of paradise—invest in luxury, invest in success!</h1>
-
-</div>
+          <div className="bg-blue-400/60 w-full h-screen p-4 sm:p-8">
+            <div className="border-double w-full border-2 border-white flex-col flex items-center justify-center gap-3 sm:gap-6 p-4 sm:p-8 h-full">
+              <h1 className='text-white font-[robert] text-2xl sm:text-4xl font-bold'>𝓦𝓲𝓽𝓷𝓮𝓼𝓼 𝓽𝓱𝓮 𝓱𝓮𝓪𝓿𝓮𝓷</h1>
+              <h1 className='text-white text-center text-sm sm:text-xl md:text-2xl font-bold'>Witness the ultimate investment opportunity in world-class luxury resorts! Step into a realm of elegance, exclusivity, and extraordinary returns. These premier destinations aren't just a place to relax—they're a chance to elevate your portfolio with high-value assets in the booming luxury hospitality market. Don't miss your chance to own a piece of paradise—invest in luxury, invest in success!</h1>
+              {/* Close button for mobile */}
+              <button 
+                onClick={handleRightPanelLeave}
+                className="sm:hidden mt-4 bg-white/20 p-2 rounded-full"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </motion.div>
 

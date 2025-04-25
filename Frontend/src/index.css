@@ -26,3 +26,53 @@
   scrollbar-width: thin;
   scrollbar-color: #d4b678 #1a1a1a;
 }
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4 {
+    word-break: break-word;
+  }
+
+  /* Make images more responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Touch-friendly buttons */
+button, 
+.button, 
+[role="button"],
+a.button {
+  min-height: 44px; /* Apple's recommended minimum touch target size */
+  min-width: 44px;
+}
+
+/* Better form inputs on mobile */
+@media (max-width: 640px) {
+  input, 
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Improve mobile table display */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
