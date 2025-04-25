@@ -27,25 +27,28 @@ const BookingManagement = () => {
 
   const handleStatusUpdate = async (bookingId, newStatus) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/api/bookings/${bookingId}/status`, {
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/bookings/${bookingId}/status`, {
         status: newStatus
       });
-      fetchBookings();
+      
+      // Update local state without refetching
+      setBookings(bookings.map(booking => 
+        booking._id === bookingId ? { ...booking, status: newStatus } : booking
+      ));
+      
     } catch (err) {
-      setError('Failed to update booking status');
+      console.error('Error updating booking status:', err);
     }
   };
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
       case 'confirmed':
         return 'bg-green-100 text-green-800';
+      case 'pending':
+        return 'bg-amber-100 text-amber-800';
       case 'cancelled':
         return 'bg-red-100 text-red-800';
-      case 'completed':
-        return 'bg-blue-100 text-blue-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
@@ -54,171 +57,191 @@ const BookingManagement = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500"></div>
+        <div className="animate-spin rounded-full h-14 w-14 border-t-2 border-b-2 border-amber-500"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-red-500 text-center p-4">
-        {error}
-        <button 
-          onClick={fetchBookings}
-          className="ml-4 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600"
-        >
-          Retry
-        </button>
+      <div className="text-center p-8">
+        <div className="inline-block bg-red-900/20 border border-red-500/50 text-red-400 px-6 py-4 rounded-xl">
+          <p className="text-base">{error}</p>
+          <button 
+            onClick={fetchBookings}
+            className="mt-4 px-5 py-2 bg-gradient-to-r from-[#cd754a] to-[#dfb562] text-white rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 p-2 md:p-0">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-800">Booking Management</h2>
+        <h2 className="text-3xl font-[fairplay] font-bold text-white">Booking Management</h2>
       </div>
 
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Guest Name
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Package/Room
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Check-In
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Check-Out
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {bookings.map((booking) => (
-              <tr key={booking._id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center">
-                    <div>
-                      <div className="text-sm font-medium text-gray-900">{booking.fullName}</div>
-                      <div className="text-sm text-gray-500">{booking.email}</div>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{booking.package || booking.accommodation}</div>
-                  <div className="text-sm text-gray-500">{booking.rooms ? `${booking.rooms} room(s)` : ''}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(booking.checkIn).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(booking.checkOut).toLocaleDateString()}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(booking.status)}`}>
-                    {booking.status}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
-                  <button
-                    onClick={() => {
-                      setSelectedBooking(booking);
-                      setShowDetails(true);
-                    }}
-                    className="text-amber-500 hover:text-amber-600"
-                  >
-                    <FiEye size={20} />
-                  </button>
-                  <button
-                    onClick={() => handleStatusUpdate(booking._id, 'confirmed')}
-                    className="text-green-500 hover:text-green-600"
-                  >
-                    <FiCheck size={20} />
-                  </button>
-                  <button
-                    onClick={() => handleStatusUpdate(booking._id, 'cancelled')}
-                    className="text-red-500 hover:text-red-600"
-                  >
-                    <FiX size={20} />
-                  </button>
-                </td>
+      <div className="bg-gradient-to-br from-black/60 to-gray-800/20 backdrop-blur-sm rounded-xl border border-gray-800/50 overflow-hidden shadow-lg">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-800/50">
+            <thead className="bg-black/40">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Guest Name
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Package/Room
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Check-In
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Check-Out
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-800/30">
+              {bookings.map((booking) => (
+                <tr key={booking._id} className="hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div>
+                        <div className="text-sm font-medium text-white">{booking.fullName}</div>
+                        <div className="text-sm text-gray-400">{booking.email}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-300">{booking.package || booking.accommodation}</div>
+                    <div className="text-xs text-gray-400">{booking.rooms ? `${booking.rooms} room(s)` : ''}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                    {new Date(booking.checkIn).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                    {new Date(booking.checkOut).toLocaleDateString()}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`px-2.5 py-1.5 text-xs rounded-full font-medium ${getStatusColor(booking.status)}`}>
+                      {booking.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
+                    <button
+                      onClick={() => {
+                        setSelectedBooking(booking);
+                        setShowDetails(true);
+                      }}
+                      className="text-amber-500 hover:text-amber-600 transition-colors"
+                    >
+                      <FiEye size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleStatusUpdate(booking._id, 'confirmed')}
+                      className="text-green-500 hover:text-green-600 transition-colors"
+                    >
+                      <FiCheck size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleStatusUpdate(booking._id, 'cancelled')}
+                      className="text-red-500 hover:text-red-600 transition-colors"
+                    >
+                      <FiX size={20} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Booking Details Modal */}
       {showDetails && selectedBooking && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-gradient-to-br from-black/90 to-gray-900/90 rounded-xl border border-gray-800/50 p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
           >
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">Booking Details</h3>
+            <div className="flex justify-between items-center mb-6 border-b border-gray-800/50 pb-4">
+              <h3 className="text-2xl font-[fairplay] font-bold text-white">Booking Details</h3>
               <button
                 onClick={() => setShowDetails(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-400 hover:text-white transition-colors"
               >
                 <FiX size={24} />
               </button>
             </div>
 
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-500">Guest Information</h4>
-                  <p className="mt-1 text-sm text-gray-900">{selectedBooking.fullName}</p>
-                  <p className="mt-1 text-sm text-gray-900">{selectedBooking.email}</p>
-                  <p className="mt-1 text-sm text-gray-900">{selectedBooking.phoneNumber}</p>
-                  <p className="mt-1 text-sm text-gray-900">{selectedBooking.country}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <h4 className="text-sm font-medium text-gray-400">Guest Information</h4>
+                  <p className="text-white">{selectedBooking.fullName}</p>
+                  <div className="flex items-center gap-2 text-gray-300">
+                    <FiMail className="w-4 h-4" /> 
+                    <span>{selectedBooking.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-300">
+                    <FiPhone className="w-4 h-4" /> 
+                    <span>{selectedBooking.phoneNumber}</span>
+                  </div>
+                  <p className="text-gray-300">{selectedBooking.country}</p>
                 </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-500">Stay Details</h4>
-                  <p className="mt-1 text-sm text-gray-900">Check-in: {new Date(selectedBooking.checkIn).toLocaleDateString()}</p>
-                  <p className="mt-1 text-sm text-gray-900">Check-out: {new Date(selectedBooking.checkOut).toLocaleDateString()}</p>
-                  <p className="mt-1 text-sm text-gray-900">
-                    Guests: {selectedBooking.adults} adults, {selectedBooking.children} children, {selectedBooking.infants} infants
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-500">Package & Preferences</h4>
-                <p className="mt-1 text-sm text-gray-900">Package: {selectedBooking.package}</p>
-                <p className="mt-1 text-sm text-gray-900">Accommodation: {selectedBooking.accommodation}</p>
-                <p className="mt-1 text-sm text-gray-900">View Preference: {selectedBooking.view}</p>
-                <p className="mt-1 text-sm text-gray-900">Meal Preference: {selectedBooking.mealPreference}</p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-medium text-gray-500">Special Requirements</h4>
-                <div className="mt-1 space-y-1">
-                  {selectedBooking.specialRequirements.map((req, index) => (
-                    <p key={index} className="text-sm text-gray-900">{req}</p>
-                  ))}
+                <div className="space-y-3">
+                  <h4 className="text-sm font-medium text-gray-400">Stay Details</h4>
+                  <div className="bg-gray-900/50 p-3 rounded-lg space-y-1">
+                    <p className="text-sm text-gray-300">Check-in: <span className="text-white">{new Date(selectedBooking.checkIn).toLocaleDateString()}</span></p>
+                    <p className="text-sm text-gray-300">Check-out: <span className="text-white">{new Date(selectedBooking.checkOut).toLocaleDateString()}</span></p>
+                    <p className="text-sm text-gray-300">
+                      Guests: <span className="text-white">{selectedBooking.adults} adults, {selectedBooking.children} children, {selectedBooking.infants} infants</span>
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-end space-x-4">
+              <div className="space-y-3">
+                <h4 className="text-sm font-medium text-gray-400">Package & Preferences</h4>
+                <div className="bg-gray-900/50 p-3 rounded-lg space-y-1">
+                  <p className="text-sm text-gray-300">Package: <span className="text-white">{selectedBooking.package}</span></p>
+                  <p className="text-sm text-gray-300">Accommodation: <span className="text-white">{selectedBooking.accommodation}</span></p>
+                  <p className="text-sm text-gray-300">View Preference: <span className="text-white">{selectedBooking.view}</span></p>
+                  <p className="text-sm text-gray-300">Meal Preference: <span className="text-white">{selectedBooking.mealPreference}</span></p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="text-sm font-medium text-gray-400">Special Requirements</h4>
+                <div className="bg-gray-900/50 p-3 rounded-lg">
+                  {selectedBooking.specialRequirements.length > 0 ? (
+                    <ul className="list-disc list-inside space-y-1">
+                      {selectedBooking.specialRequirements.map((req, index) => (
+                        <li key={index} className="text-sm text-gray-300">{req}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm text-gray-400">No special requirements</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap justify-end gap-4 pt-4 border-t border-gray-800/50">
                 <button
                   onClick={() => {
                     handleStatusUpdate(selectedBooking._id, 'confirmed');
                     setShowDetails(false);
                   }}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+                  className="px-5 py-2.5 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Confirm Booking
                 </button>
@@ -227,7 +250,7 @@ const BookingManagement = () => {
                     handleStatusUpdate(selectedBooking._id, 'cancelled');
                     setShowDetails(false);
                   }}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                  className="px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-500 text-white rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Cancel Booking
                 </button>
@@ -240,4 +263,4 @@ const BookingManagement = () => {
   );
 };
 
-export default BookingManagement; 
+export default BookingManagement;

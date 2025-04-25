@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaHeart, FaUser, FaBriefcase, FaUsers, FaVideo, FaChevronRight } from 'react-icons/fa'
 import { FaShield, FaStar, FaWandMagicSparkles, FaAward } from 'react-icons/fa6'
 import { motion } from 'framer-motion'
-import bg from "../assets/bg.mp4"
+//import bg from "../assets/bg.mp4"
 const userTypeData = {
   doctors: {
     title: "A Healing Haven",
@@ -101,7 +101,7 @@ const Home = () => {
           style={{ zIndex: leftPanelOpen ? 45 : 40 }}
         >
         <h1 className='text-white font-medium text-sm sm:text-xl'>
-        𝓢𝓮𝓬𝓾𝓻𝓮 <br/> 𝓨𝓸𝓾𝓻 <br/> 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂
+         𝓢𝓮𝓬𝓾𝓻𝓮 <br/> 𝓨𝓸𝓾𝓻 <br/> 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂
         </h1>
         </motion.div>
         
@@ -123,7 +123,7 @@ const Home = () => {
           onTouchStart={handleRightPanelEnter}
           style={{ zIndex: rightPanelOpen ? 45 : 40 }}
         >
-          𝓦𝓲𝓽𝓷𝓮𝓼𝓼<br/> 𝓽𝓱𝓮<br/> 𝓱𝓮𝓪𝓿𝓮𝓷
+           𝓦𝓲𝓽𝓷𝓮𝓼𝓼<br/> 𝓽𝓱𝓮<br/> 𝓱𝓮𝓪𝓿𝓮𝓷
         </motion.div>
 
         {/* Left Sliding Panel - improved for mobile */}
@@ -197,7 +197,7 @@ const Home = () => {
     initial={{ scale: 1.1 }}
     animate={{ scale: 1 }}
     transition={{ duration: 1.5 }}
-    src={bg} 
+    src="https://player.vimeo.com/external/421594651.hd.mp4?s=1af97baa753c7027289025950dad6c4dcc9c6bb2&profile_id=175&oauth2_token_id=57447761" 
     autoPlay
     muted 
     loop 

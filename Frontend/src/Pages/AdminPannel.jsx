@@ -34,23 +34,24 @@ const AdminPannel = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 bg-black text-white">
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-black to-gray-900 text-white">
       <div className="flex flex-col md:flex-row">
         {/* Mobile Sidebar Toggle */}
         <div className="md:hidden fixed top-[4.5rem] left-4 z-50">
           <button 
             onClick={toggleSidebar}
-            className="bg-amber-600 p-2 rounded-full shadow-lg"
+            className="bg-gradient-to-r from-[#cd754a] to-[#dfb562] p-3 rounded-full shadow-lg flex items-center justify-center"
+            aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
-            {sidebarOpen ? <FaTimes /> : <FaBars />}
+            {sidebarOpen ? <FaTimes className="w-5 h-5" /> : <FaBars className="w-5 h-5" />}
           </button>
         </div>
 
         {/* Sidebar - Hidden on mobile by default */}
         <div className={`
-          fixed md:relative z-40 transition-all duration-300 ease-in-out
-          ${sidebarOpen ? 'left-0' : '-left-64 md:left-0'} 
-          w-64 h-[calc(100vh-4rem)]
+          fixed md:sticky top-16 md:top-16 transition-all duration-300 ease-in-out
+          ${sidebarOpen ? 'left-0 shadow-2xl' : '-left-[280px] md:left-0'} 
+          w-[280px] h-[calc(100vh-4rem)] z-40
         `}>
           <AdminSidebar 
             activeTab={activeTab} 
@@ -64,13 +65,13 @@ const AdminPannel = () => {
         {/* Overlay to close sidebar on mobile */}
         {sidebarOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-30 md:hidden" 
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-30 md:hidden" 
             onClick={() => setSidebarOpen(false)}
           ></div>
         )}
 
         {/* Main Content */}
-        <div className="flex-1 p-4 md:p-6 ml-0 md:ml-64 transition-all duration-300 ease-in-out">
+        <div className="flex-1 p-4 md:p-8 ml-0 md:ml-[280px] transition-all duration-300 ease-in-out">
           {renderContent()}
         </div>
       </div>
