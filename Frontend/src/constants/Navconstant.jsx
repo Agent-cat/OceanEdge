@@ -23,10 +23,6 @@ export const Navconstants1 = [
 export const Navconstants2 = [
     
     {
-        title: 'Explore',
-        to: '/#explore',
-    },
-    {
         title: 'wellness centre',
         to: '/wellness-centre',
     },

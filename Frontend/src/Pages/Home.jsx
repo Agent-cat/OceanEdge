@@ -84,7 +84,7 @@ const Home = () => {
       >
         {/* Left Semi-circle - Mobile visibility improved */}
         <motion.div 
-          className="absolute text-xl text-white font-bold flex z-40 left-0 top-[40%] items-center justify-center -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-r-full shadow-lg"
+          className="absolute text-xl hidden md:flex text-white font-bold  z-40 left-0 top-[40%] items-center justify-center -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-r-full shadow-lg"
           initial={{ scale: 1 }}
           whileHover={{ 
             scale: 1.1,
@@ -100,14 +100,14 @@ const Home = () => {
           onTouchStart={handleLeftPanelEnter}
           style={{ zIndex: leftPanelOpen ? 45 : 40 }}
         >
-        <h1 className='text-white font-medium text-sm sm:text-xl'>
-         𝓢𝓮𝓬𝓾𝓻𝓮 <br/> 𝓨𝓸𝓾𝓻 <br/> 𝓢𝓮𝓻𝓮𝓷𝓲𝓽𝔂
+        <h1 className='text-white cal-sans-regular text-center font-medium text-sm sm:text-xl'>
+        Secure <br/> your <br/> Serenity
         </h1>
         </motion.div>
         
         {/* Right Semi-circle - Mobile visibility improved */}
         <motion.div 
-          className="absolute flex items-center text-center justify-center text-sm sm:text-xl text-white font-bold z-40 right-0 top-[40%] -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-l-full shadow-lg"
+          className="absolute hidden md:flex items-center text-center justify-center text-sm sm:text-xl text-white font-bold z-40 right-0 top-[40%] -translate-y-1/2 w-24 h-24 sm:w-36 sm:h-36 bg-[#cd754a] backdrop-blur-sm rounded-l-full shadow-lg"
           initial={{ scale: 1 }}
           whileHover={{ 
             scale: 1.1,
@@ -227,7 +227,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className='text-3xl bg-clip-text text-transparent bg-gradient-to-r from-white to-[#dfb562] sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-3 sm:mb-4'
           >
-            Experience The <span className='bg-clip-text text-transparent bg-gradient-to-r from-white to-[#dfb562] font-bold'>ICONIC</span> Life
+            Experience The <span className='bg-clip-text  text-transparent bg-gradient-to-r from-white to-[#dfb562] font-bold'>ICONIC</span> Life
           </motion.h1>
           
           <motion.p 
@@ -255,13 +255,12 @@ const Home = () => {
               Book Your Stay</Link>
               
             </motion.button>
-            <motion.button to='/booking'
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <Link to='/purchase'
+          
               className='border border-white hover:bg-white/10 text-white py-2.5 sm:py-3 px-5 sm:px-8 rounded-md transition text-sm sm:text-base'
             >
               Own Your Luxury Retreat
-            </motion.button>
+            </Link>
           </motion.div>
         </motion.div>
 
