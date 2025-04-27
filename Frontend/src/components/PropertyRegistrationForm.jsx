@@ -146,38 +146,6 @@ const PropertyRegistrationForm = ({ propertyId, onClose }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-gray-300 mb-2">Country of Residence*</label>
-            <input
-              type="text"
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              placeholder="Enter your country"
-              className={`w-full px-4 py-2 rounded-lg bg-gray-800 text-white border ${
-                errors.country ? 'border-red-500' : 'border-gray-700'
-              } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-colors`}
-            />
-            {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
-          </div>
-
-          <div>
-            <label className="block text-gray-300 mb-2">State/Province*</label>
-            <input
-              type="text"
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-              placeholder="Enter your state or province"
-              className={`w-full px-4 py-2 rounded-lg bg-gray-800 text-white border ${
-                errors.state ? 'border-red-500' : 'border-gray-700'
-              } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-colors`}
-            />
-            {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
             <label className="block text-gray-300 mb-2">Phone Number*</label>
             <input
               type="tel"
@@ -207,6 +175,40 @@ const PropertyRegistrationForm = ({ propertyId, onClose }) => {
             {errors.occupation && <p className="text-red-500 text-sm mt-1">{errors.occupation}</p>}
           </div>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          
+          <div>
+            <label className="block text-gray-300 mb-2">State/Province*</label>
+            <input
+              type="text"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              placeholder="Enter your state or province"
+              className={`w-full px-4 py-2 rounded-lg bg-gray-800 text-white border ${
+                errors.state ? 'border-red-500' : 'border-gray-700'
+              } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-colors`}
+            />
+            {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
+          </div>
+          <div>
+            <label className="block text-gray-300 mb-2">Country of Residence*</label>
+            <input
+              type="text"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              placeholder="Enter your country"
+              className={`w-full px-4 py-2 rounded-lg bg-gray-800 text-white border ${
+                errors.country ? 'border-red-500' : 'border-gray-700'
+              } focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none transition-colors`}
+            />
+            {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
+          </div>
+        </div>
+
+        
 
         <div>
           <label className="block text-gray-300 mb-2">Property Requirements & Preferences*</label>
@@ -257,7 +259,7 @@ const PropertyRegistrationForm = ({ propertyId, onClose }) => {
                 : 'bg-gradient-to-r from-[#cd754a] to-[#dfb562] text-white hover:opacity-90'
             }`}
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </motion.button>
         </div>
       </form>

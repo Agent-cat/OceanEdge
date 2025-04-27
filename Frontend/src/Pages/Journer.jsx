@@ -173,10 +173,10 @@ const Journer = () => {
         className="bg-gradient-to-b from-black to-gray-900/90 py-20 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-serif mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#cd754a] to-[#dfb562]">
+          <h2 className="text-4xl sm:text-5xl cal-sans-regular font-serif mb-8 bg-clip-text text-transparent bg-gradient-to-r from-[#cd754a] to-[#dfb562]">
             Join Us on This Extraordinary Journey
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-300 mb-8">
+          <p className="text-xl text sm:text-3xl font-mono text-gray-300 mb-8">
             Be part of something truly exceptional as we continue to shape the future of luxury living and hospitality.
           </p>
           <motion.button 

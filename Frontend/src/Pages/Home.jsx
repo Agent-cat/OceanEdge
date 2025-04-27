@@ -40,7 +40,7 @@ const userTypeData = {
   },
   families: {
     title: "Generational Memories",
-    description: "Create lasting memories in a safe, engaging environment where every family member can find their perfect activity. From children's play areas to multi-generational entertainment options, we've thought of everyone.",
+    description: "Craft unforgettable moments in a secure, vibrant setting designed for every generation. With dedicated play zones for children and a wide array of entertainment options for all ages, we've created experiences that bring families together.",
     image: "https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
     features: [
       "Family-Friendly Activities",
@@ -289,7 +289,7 @@ const Home = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='bg-amber-900/30 text-amber-300 text-xs sm:text-sm font-medium py-2 px-4 sm:px-6 rounded-full inline-block mb-6 sm:mb-8 lg:mb-10'
+            className='bg-amber-900/30 font-serif text-amber-300 text-xs sm:text-sm font-medium py-2 px-4 sm:px-6 rounded-full inline-block mb-6 sm:mb-8 lg:mb-10'
           >
             THE VISION BEHIND ICONIC OCEAN EDGE
           </motion.div>
@@ -299,9 +299,9 @@ const Home = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-6 sm:mb-8 lg:mb-10'
+            className='text-2xl sm:text-3xl cal-sans-regular  md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 lg:mb-10'
           >
-            Creating Extraordinary<br className='hidden sm:block' />Moments & Memories
+            Creating Extraordinary Moments & Memories
           </motion.h2>
           
           <motion.p 
@@ -311,9 +311,7 @@ const Home = () => {
             viewport={{ once: true }}
             className='text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto px-2'
           >
-            ICONIC Ocean Edge is a testament to luxury living with unparalleled 
-            experiences on the pristine coastline of Andhra Pradesh. Designed 
-            for discerning individuals who value exclusivity and sophistication.
+           ICONIC Ocean Edge redefines luxury living along the untouched coastline of Andhra Pradesh, offering an exclusive haven for those who seek elegance, privacy, and extraordinary experiences.
           </motion.p>
         </div>
 
@@ -428,10 +426,10 @@ const Home = () => {
             viewport={{ once: true }}
             className='text-center mb-12 sm:mb-14 lg:mb-16'
           >
-            <div className='bg-amber-900/30 text-amber-300 text-xs sm:text-sm font-medium py-2 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6'>
+            <div className='bg-amber-900/30  font-mono text-amber-300 text-xs sm:text-lg font-medium py-2 px-4 sm:px-6 rounded-full inline-block mb-4 sm:mb-6'>
               TAILORED FOR YOU
             </div>
-            <h2 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif'>
+            <h2 className='text-2xl sm:text-2xl md:text-4xl lg:text-4xl font-serif'>
               Experiences Designed For Your Lifestyle
             </h2>
           </motion.div>
@@ -481,7 +479,7 @@ const Home = () => {
                 
                 <motion.div 
                   whileHover={{ scale: 1.02 }}
-                  className={`flex items-center p-3 sm:p-4 rounded-lg mb-3 cursor-pointer ${selectedUserType === 'businessOwners' ? 'bg-[#cd754a]' : 'hover:bg-gray-800/50'} transition`}
+                  className={`flex items-center p-3 sm:p-4 rounded-lg mb-3 cursor-pointer ${selectedUserType === 'entrepreneurs' ? 'bg-[#cd754a]' : 'hover:bg-gray-800/50'} transition`}
                   onClick={() => setSelectedUserType('businessOwners')}
                 >
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${selectedUserType === 'businessOwners' ? 'bg-white/20' : 'bg-gray-700'} mr-4`}>

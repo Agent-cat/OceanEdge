@@ -260,48 +260,8 @@ const Occasions = () => {
       </motion.div>
 
       {/* CTA Section */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="relative w-full py-20 mb-0"
-      >
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=2070&auto=format&fit=crop" 
-            alt="Elegant Event Setup" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70"></div>
-        </div>
-        
-        <motion.div 
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          viewport={{ once: true }}
-          className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8"
-        >
-          <h2 className="text-3xl sm:text-4xl font-serif mb-6 text-white">
-            Every occasion at Ocean Edge is a seamless blend of luxury, precision, and unforgettable experiences.
-          </h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="bg-[#D4B678] hover:bg-[#c9a55f] text-black font-medium py-3 px-8 rounded-md transition"
-            >
-              Plan Your Event
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              className="bg-transparent hover:bg-white/10 text-white border border-white font-medium py-3 px-8 rounded-md transition"
-            >
-              View Our Venues
-            </motion.button>
-          </div>
-        </motion.div>
-      </motion.div>
+      
+      
     </div>
   )
 }

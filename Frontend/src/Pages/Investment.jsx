@@ -96,14 +96,14 @@ const Investment = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="relative z-10 text-center px-4 max-w-4xl mx-auto"
         >
-          <div className="inline-block px-4 py-1 rounded-full text-amber-400 text-sm font-medium mb-4">
+          <div className="inline-block px-4 py-1 font-mono rounded-full text-amber-400 text-md font-medium mb-4">
             YOUR NEXT SMART INVESTMENT
           </div>
           <h1 className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-white to-[#dfb562] md:text-6xl font-bold mb-6">
             Luxury Living <span className="font-serif italic">&</span> <br className="md:hidden" />{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#cd754a] to-[#dfb562]">Smart Investment</span>
           </h1>
-          <p className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg">
+          <p className="text-gray-300 max-w-2xl font-semibold  mx-auto text-base md:text-lg">
             Own a piece of paradise that offers both an exceptional lifestyle and a strategic investment opportunity with compelling returns.
           </p>
         </motion.div>
